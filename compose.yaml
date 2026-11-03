@@ -1,0 +1,10 @@
+include:
+  - path: ./catalogue/compose.yaml
+    env_file: ./catalogue/.env
+  - path: ./emprunts/compose.yaml
+  - path: ./notifications/compose.yaml
+
+networks:
+  default:
+    name: projet4-network
+    driver: bridge

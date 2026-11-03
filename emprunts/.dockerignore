@@ -1,0 +1,5 @@
+build/
+nbproject/private/
+test/
+mysql-connector-j-8.4.0.jar
+*.zip

@@ -1,0 +1,16 @@
+# Secrets / clés
+.vagrant/
+.env
+*.pem
+private_key
+
+# NetBeans / Ant
+nbproject/private/
+build/
+dist/
+*.war
+
+# Divers
+*.tar
+*.zip
+*.log

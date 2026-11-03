@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="urn:jboss:domain:datasources:7.1">
+    <datasource jndi-name="java:/CatalogueDS" pool-name="CatalogueDS" enabled="true" use-java-context="true">
+        <connection-url>jdbc:mysql://${env.DB_HOST:mysql-catalogue}:${env.DB_PORT:3306}/${env.DB_NAME:cataloguedb}?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC</connection-url>
+        <driver>mysql-connector-j-8.4.0.jar</driver>
+        <security>
+            <user-name>${env.DB_USER:catalogue_user}</user-name>
+            <password>${env.DB_PASSWORD:catalogue_mot_de_passe_KEITA}</password>
+        </security>
+    </datasource>
+</datasources>

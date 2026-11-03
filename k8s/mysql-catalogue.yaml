@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-catalogue-pvc
+  namespace: projet4
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-catalogue
+  namespace: projet4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-catalogue
+  template:
+    metadata:
+      labels:
+        app: mysql-catalogue
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - secretRef:
+                name: mysql-catalogue-secret
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+          readinessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+                - -u
+                - catalogue_user
+                - -pcatalogue_mot_de_passe_KEITA
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            timeoutSeconds: 10
+          livenessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+                - -u
+                - catalogue_user
+                - -pcatalogue_mot_de_passe_KEITA
+            initialDelaySeconds: 150
+            periodSeconds: 15
+            timeoutSeconds: 10
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mysql-catalogue-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-catalogue
+  namespace: projet4
+spec:
+  selector:
+    app: mysql-catalogue
+  ports:
+    - port: 3306
+      targetPort: 3306

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="urn:jboss:domain:datasources:7.1">
+    <datasource jndi-name="java:/MySQLDS_emprunts"
+                pool-name="MySQLDS_emprunts"
+                enabled="true"
+                use-java-context="true">
+        <connection-url>jdbc:mysql://mysql-emprunts:3306/emprunts_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC</connection-url>
+        <driver>mysql-connector-j-8.4.0.jar</driver>
+        <security>
+            <user-name>emprunts_user</user-name>
+            <password>emprunts_pass</password>
+        </security>
+    </datasource>
+</datasources>

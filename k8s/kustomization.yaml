@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: projet4
+
+resources:
+  - namespace.yaml
+  - secrets.yaml
+  - configmaps.yaml
+  - mysql-catalogue.yaml
+  - mysql-emprunts.yaml
+  - mysql-notifications.yaml
+  - app-catalogue.yaml
+  - app-emprunts.yaml
+  - app-notifications.yaml
+  - ingress.yaml
